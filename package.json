@@ -1,0 +1,28 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Vathsal Vuppala Portfolio",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Vathsal Vuppala",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@vitejs/plugin-react": "^6.0.3",
+    "framer-motion": "^12.42.2",
+    "gsap": "^3.15.0",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^1.25.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.7.0",
+    "react-intersection-observer": "^10.1.0",
+    "react-scroll": "^1.9.3",
+    "vite": "^8.1.5"
+  }
+}

@@ -1,0 +1,55 @@
+• Databases & Cloud:  MySQL, MongoDB, PostgreSQL, Firebase, Azure (App Service, Blob Storage)
+• Full-Stack:  React, Next.js, Node.js, Express.js, Flask, Django, Tailwind CSS
+APIs, Docker, Linux, Git
+•Agentic & Infra:  Multi-Agent Workflows, Tool Use / Function Calling, Vector Databases (FAISS, ChromaDB), FastAPI, REST
+Hugging Face Transformers, PEFT / LoRA, RAG, Prompt Engineering, CNNs, RNNs, DQN
+•AI / ML & LLMs:  PyTorch, TensorFlow, Keras, Scikit-learn, XGBoost, LangChain, LlamaIndex, LLaMA, Mistral, OpenAI API,
+• Languages:  Python, JavaScript (ES6+), TypeScript, Java, C, HTML5, CSS3
+Skills
+• Generative AI with LLMs:  Coursera / DeepLearning.AI & AWS — Fine-tuning (LoRA/PEFT), RLHF, LLM deployment
+• Machine Learning with Python:  IBM / Coursera — Supervised & unsupervised learning with Scikit-learn
+• Deep Learning Specialization:  Coursera / DeepLearning.AI — Neural networks, CNNs, RNNs, optimization (Andrew Ng)
+Certifications
+React frontend.
+autonomously plans, writes, and critic-reviews a structured technical report with IEEE citations and PDF/DOCX export via a
+Multi-agent RAG platform that takes a seminar topic, retrieves and synthesises research papers via vector search, then
+Python, LangChain, LlamaIndex, ChromaDB, FastAPI, React
+•
+Agentic Seminar Report Writer
+cases.
+and confirm orders in real time — with persistent memory, fallback logic, and multi-step orchestration for modifications and edge
+Voice-enabled LLM agent that accepts live customer calls, interprets natural language orders, and uses tool calling to write
+Python, LangChain, OpenAI API, Twilio Voice API
+•
+Autonomous Barista Agent
+DeepSORT worker tracking, a FastAPI inference backend, and a React dashboard with live violation alerts and compliance logs.
+Real-time workplace safety monitor using YOLOv8 to detect missing PPE (helmets, vests, gloves) from live video feeds with
+Python, YOLOv8, DeepSORT, FastAPI, React, PostgreSQL
+•
+PPE Safety Compliance Detection System
+Projects
+environments.
+using TensorFlow and PyTorch.  Deployed scalable inference APIs for consistent clinical interpretation across multi-site
+support doctor decision-making.  Implemented DICOM preprocessing, feature extraction, and deep learning model training
+◦NOVO Neurotech — Clinical Neurological Insights System:  Built AI analysis pipelines for neurological scan data to
+identification of behavioral patterns and improved counselor intervention speed.
+psychometric assessment interpretation, student profiling, and personalized recommendations.  Dashboards enabled early
+teachers,  and  schools  using  Python,  FastAPI,  and  React.   Designed  multi-agent  pipelines  with  LLaMA  and  Mistral  for
+◦NOVO Wellness — Student Mental Health AI Platform:  Architected an end-to-end agentic AI platform for students,
+AI Software Developer                                                                            Dec 2024 – Present
+•
+SAAP Technologies                                                                                                                      Hyderabad, Telangana
+Experience
+B.Tech in Computer Science and Information Technology| CGPA: 8.7 / 10                          July 2021 – May 2025
+•
+CVR College of Engineering (JNTUH)                                                                                   Hyderabad, Telangana
+Education
+across clinical AI and ed-tech domains, with a focus on systems that are reliable, maintainable, and built for scale.
+AI platforms — from model training and inference APIs (Python, FastAPI) to front-end interfaces (React).  Experienced
+in LLM-based multi-agent architectures, agentic workflow design (LLaMA, Mistral, LangChain), and end-to-end full-stack
+AI Software Developer with 1.5+ years of experience designing and shipping production-grade intelligent systems.  Specializes
+Professional Summary
+linkedin.com/in/vathsalvuppala| github.com/vathsal14                                                                                    Hyderabad, India
+                                                                               vathsal14@gmail.com| +91 87904 23358
+Vathsal Vuppala
+----------------Page (0) Break----------------
