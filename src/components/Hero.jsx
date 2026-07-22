@@ -11,7 +11,7 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
 
   return (
-    <section className="hero section" ref={ref} id="hero">
+    <section className="hero section" ref={ref} id="hero" aria-label="Vathsal Vuppala — AI Software Developer">
       <motion.div
         className="container"
         style={{ y, opacity, position: 'relative', zIndex: 1, width: '100%' }}

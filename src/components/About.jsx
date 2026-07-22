@@ -14,7 +14,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="section" id="about" ref={ref}>
+    <section className="section" id="about" aria-label="About Vathsal Vuppala" ref={ref}>
       <div className="container">
         <div className="grid-2" style={{ alignItems: 'center' }}>
 
@@ -24,7 +24,7 @@ export default function About() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}>
             <div className="about-image-wrapper">
-              <img src="/image.png" alt="Vathsal Vuppala" className="about-image" />
+              <img src="/image.png" alt="Vathsal Vuppala — AI Software Developer based in Hyderabad, India" className="about-image" loading="lazy" />
             </div>
 
             <div style={{ marginTop: 20, display: 'flex', flexWrap: 'wrap', gap: 8 }}>

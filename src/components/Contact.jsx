@@ -2,7 +2,9 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import LottiePlayer from './LottiePlayer'
 import leaningAnim from '../assets/Person Leaning Holding Smartphone.json'
+import sentAnim from '../assets/Message Sent.json'
 import { FiMail, FiLinkedin, FiGithub, FiFileText } from 'react-icons/fi'
+import emailjs from '@emailjs/browser'
 
 const LINKS = [
   { icon: <FiMail size={18} strokeWidth={2} />, label: 'Email', sub: 'vathsal14@gmail.com', href: 'mailto:vathsal14@gmail.com' },
@@ -15,17 +17,31 @@ export default function Contact() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [sent, setSent] = useState(false)
+  const [isSending, setIsSending] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const { name, email, message } = form
-    window.open(`mailto:vathsal14@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(`From: ${name} <${email}>\n\n${message}`)}`)
-    setSent(true)
+    setIsSending(true)
+    
+    emailjs.sendForm(
+      'service_c8kbvl9',
+      'template_6uavkcr',
+      e.target,
+      'Rd3EXvPlfxF5FUKnh'
+    ).then(() => {
+      setSent(true)
+      setForm({ name: '', email: '', message: '' })
+      setIsSending(false)
+    }).catch((error) => {
+      console.error('EmailJS Error:', error)
+      alert("Failed to send message. Please try again.")
+      setIsSending(false)
+    })
   }
 
   return (
-    <section className="section" id="contact">
+    <section className="section" id="contact" aria-label="Contact Vathsal Vuppala">
       <div className="container">
         <motion.div ref={ref} className="section-header"
           initial={{ opacity: 0, y: 24 }}
@@ -40,7 +56,7 @@ export default function Contact() {
 
         <div className="contact-wrapper">
           <motion.div
-            style={{ marginTop: '-50px' }}
+            style={{ marginTop: '-41px' }}
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}>
@@ -71,18 +87,20 @@ export default function Contact() {
           </motion.div>
 
           <motion.div
-            style={{ position: 'relative', marginRight: '80px' }}
+            style={{ position: 'relative' }}
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}>
 
-            <div style={{ position: 'absolute', right: '-160px', top: '50%', transform: 'translateY(-50%)', width: '220px', zIndex: 10, pointerEvents: 'none' }}>
+            <div className="lottie-contact-float" style={{ position: 'absolute', right: '-160px', top: '50%', transform: 'translateY(-50%)', width: '220px', zIndex: 10, pointerEvents: 'none' }}>
               <LottiePlayer src={leaningAnim} style={{ width: '100%', height: 'auto' }} />
             </div>
 
             {sent ? (
-              <div className="card" style={{ textAlign: 'center', padding: '56px 32px' }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>✓</div>
+              <div className="card" style={{ textAlign: 'center', padding: '56px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ width: '120px', height: '120px', marginBottom: 8 }}>
+                  <LottiePlayer src={sentAnim} style={{ width: '100%', height: '100%' }} />
+                </div>
                 <h3 className="heading-md" style={{ marginBottom: 8 }}>Message sent.</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
                   I'll get back to you within 24 hours.
@@ -95,21 +113,21 @@ export default function Contact() {
               <form className="card" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                 <div className="input-group">
                   <label className="input-label">Name</label>
-                  <input className="input-field" type="text" required placeholder="Your name"
+                  <input className="input-field" type="text" name="name" required placeholder="Your name"
                     value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
                 </div>
                 <div className="input-group">
                   <label className="input-label">Email</label>
-                  <input className="input-field" type="email" required placeholder="your@email.com"
+                  <input className="input-field" type="email" name="email" required placeholder="your@email.com"
                     value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                 </div>
                 <div className="input-group">
                   <label className="input-label">Message</label>
-                  <textarea className="input-field" rows={5} required placeholder="Tell me about your project..."
+                  <textarea className="input-field" rows={5} name="message" required placeholder="Tell me about your project..."
                     value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: 8 }}>
-                  Send Message →
+                <button type="submit" disabled={isSending} className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: 8, opacity: isSending ? 0.7 : 1 }}>
+                  {isSending ? 'Sending...' : 'Send Message →'}
                 </button>
               </form>
             )}

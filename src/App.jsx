@@ -38,7 +38,7 @@ function ParallaxDivider({ lottieSrc }) {
     <motion.div ref={ref} style={{ y, position: 'relative', zIndex: 50 }}>
       <div className="divider" />
       {lottieSrc && (
-        <div style={{ position: 'absolute', right: '10%', top: '50%', transform: 'translateY(-20%)', width: '400px', height: '400px', zIndex: 50 }}>
+        <div className="lottie-divider-float" style={{ position: 'absolute', right: '10%', top: '50%', transform: 'translateY(-20%)', width: '400px', height: '400px', zIndex: 50 }}>
           <LottiePlayer src={lottieSrc} style={{ width: '100%', height: '100%' }} />
         </div>
       )}
@@ -135,7 +135,7 @@ export default function App() {
         {showAllProjects ? (
           <AllProjectsView onBack={() => { setShowAllProjects(false); window.scrollTo(0, 0) }} />
         ) : (
-          <main>
+          <main aria-label="Portfolio content">
             <Hero />
             <Marquee />
             <ParallaxDivider />
@@ -151,10 +151,10 @@ export default function App() {
           </main>
         )}
 
-        <footer className="footer">
+        <footer className="footer" role="contentinfo" aria-label="Site footer">
           <div className="container footer-inner">
             <div className="footer-copy">
-              © 2025 Vathsal Vuppala · Built with React + Framer Motion
+              © 2026 Vathsal Vuppala
             </div>
             <div className="footer-copy">Hyderabad, India</div>
           </div>

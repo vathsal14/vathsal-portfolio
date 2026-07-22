@@ -175,7 +175,7 @@ export function ProjectList({ title, projects, delayOffset = 0, layout = 'list' 
               <div className="project-card-header">
                 {p.logo ? (
                   <div className="project-logo-wrap" style={{ background: p.logoBg || 'transparent', borderRadius: p.logoBg ? 4 : 0 }}>
-                    <img src={p.logo} alt={p.title} className="project-logo" style={{ padding: p.logoBg ? 4 : 0 }} />
+                    <img src={p.logo} alt={`${p.title} logo`} className="project-logo" style={{ padding: p.logoBg ? 4 : 0 }} loading="lazy" />
                   </div>
                 ) : (
                   <div className="project-num" style={{ fontSize: '1rem', paddingTop: 0 }}>{p.num}</div>
@@ -214,7 +214,7 @@ export function ProjectList({ title, projects, delayOffset = 0, layout = 'list' 
 
               {p.logo ? (
                 <div className="project-logo-wrap" style={{ background: p.logoBg || 'transparent', borderRadius: p.logoBg ? 4 : 0 }}>
-                  <img src={p.logo} alt={p.title} className="project-logo" style={{ padding: p.logoBg ? 4 : 0 }} />
+                  <img src={p.logo} alt={`${p.title} logo`} className="project-logo" style={{ padding: p.logoBg ? 4 : 0 }} loading="lazy" />
                 </div>
               ) : (
                 <div className="project-num">{p.num}</div>
@@ -253,7 +253,7 @@ export default function Projects({ onSeeAll }) {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="section" id="projects" style={{ background: 'var(--bg-2)' }}>
+    <section className="section" id="projects" aria-label="Featured Projects and Portfolio" style={{ background: 'var(--bg-2)' }}>
       <div className="container">
         <motion.div ref={ref} className="section-header"
           initial={{ opacity: 0, y: 24 }}
@@ -292,7 +292,7 @@ export default function Projects({ onSeeAll }) {
               >
                 {/* Cat on top of the first container */}
                 {i === 0 && (
-                  <div style={{ position: 'absolute', top: '-360px', right: '-80px', width: '500px', height: '500px', pointerEvents: 'none', zIndex: 10 }}>
+                  <div className="lottie-cat-float" style={{ position: 'absolute', top: '-360px', right: '-80px', width: '500px', height: '500px', pointerEvents: 'none', zIndex: 10 }}>
                     <LottiePlayer src={catAnim} style={{ width: '100%', height: '100%' }} />
                   </div>
                 )}

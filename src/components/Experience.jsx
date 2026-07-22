@@ -8,7 +8,7 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="section" id="experience">
+    <section className="section" id="experience" aria-label="Work Experience and Education">
       <div className="container">
         <motion.div ref={ref} className="section-header"
           initial={{ opacity: 0, y: 24 }}
@@ -18,14 +18,14 @@ export default function Experience() {
           <h2 className="heading-xl" style={{ marginTop: 12 }}>Experience</h2>
         </motion.div>
 
-        <div className="grid-2" style={{ gap: 72, gridTemplateColumns: '1.4fr 1fr' }}>
+        <div className="grid-2 grid-experience" style={{ gap: 72 }}>
           {/* Timeline */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}>
             <div className="timeline">
-              
+
               {/* SAAP */}
               <div className="timeline-item">
                 <div className="timeline-left">
@@ -33,7 +33,7 @@ export default function Experience() {
                 </div>
                 <div className="timeline-right">
                   <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
-                    <img src="/saap.png" alt="SAAP" className="edu-logo" />
+                    <img src="/saap.png" alt="SAAP Technologies logo" className="edu-logo" loading="lazy" />
                     <div>
                       <div className="timeline-company" style={{ marginBottom: 0 }}>SAAP Technologies</div>
                       <div className="timeline-role" style={{ marginBottom: 0 }}>AI Software Developer · Hyderabad</div>
@@ -79,7 +79,7 @@ export default function Experience() {
                 </div>
                 <div className="timeline-right">
                   <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-                    <img src="/coderscave.png" alt="CodersCave" className="edu-logo" />
+                    <img src="/coderscave.png" alt="CodersCave logo" className="edu-logo" loading="lazy" />
                     <div>
                       <div className="timeline-company" style={{ marginBottom: 0 }}>Web Development Intern</div>
                       <div className="timeline-role" style={{ marginBottom: 0 }}>CodersCave · India</div>
@@ -98,7 +98,7 @@ export default function Experience() {
                 </div>
                 <div className="timeline-right">
                   <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-                    <img src="/csi_logo.png" alt="Computer Society of India" className="edu-logo" />
+                    <img src="/csi_logo.png" alt="Computer Society of India logo" className="edu-logo" loading="lazy" />
                     <div>
                       <div className="timeline-company" style={{ marginBottom: 0 }}>Treasurer</div>
                       <div className="timeline-role" style={{ marginBottom: 0 }}>Computer Society of India · CVR College</div>
@@ -123,7 +123,7 @@ export default function Experience() {
               <div className="card edu-card">
                 <div className="edu-row">
                   <div className="edu-content-left">
-                    <img src="/cvr.webp" alt="CVR College Logo" className="edu-logo" />
+                    <img src="/cvr.webp" alt="CVR College of Engineering logo" className="edu-logo" loading="lazy" />
                     <div>
                       <div className="edu-degree">B.Tech — Computer Science & IT</div>
                       <div className="edu-college">CVR College of Engineering (JNTUH)</div>
@@ -138,7 +138,7 @@ export default function Experience() {
               <div className="card edu-card">
                 <div className="edu-row">
                   <div className="edu-content-left">
-                    <img src="/kmjc.png" alt="Krishnamurthy Junior College Logo" className="edu-logo" />
+                    <img src="/kmjc.png" alt="Krishnamurthy Junior College logo" className="edu-logo" loading="lazy" />
                     <div>
                       <div className="edu-degree">Intermediate — MPC</div>
                       <div className="edu-college">Krishnamurthy Junior College</div>
@@ -153,9 +153,9 @@ export default function Experience() {
               <div className="card edu-card">
                 <div className="edu-row">
                   <div className="edu-content-left">
-                    <img src="/hps-ramanthapur.jpg" alt="HPS Ramanthapur Logo" className="edu-logo" />
+                    <img src="/hps-ramanthapur.jpg" alt="The Hyderabad Public School Ramanthapur logo" className="edu-logo" loading="lazy" />
                     <div>
-                      <div className="edu-degree">Secondary School (CBSEdecra)</div>
+                      <div className="edu-degree">Secondary School (CBSE)</div>
                       <div className="edu-college">The Hyderabad Public School, Ramanthapur</div>
                       <div className="label" style={{ marginTop: 4 }}>2009 – 2019</div>
                     </div>
@@ -166,8 +166,8 @@ export default function Experience() {
 
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 40, opacity: 0.8 }}>
-              <div style={{ width: 450, height: 450 }}>
+            <div className="lottie-desktop-only" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 40, opacity: 0.8 }}>
+              <div style={{ width: '100%', maxWidth: 380, aspectRatio: '1/1' }}>
                 <LottiePlayer src={workingAnim} style={{ width: '100%', height: '100%' }} />
               </div>
             </div>

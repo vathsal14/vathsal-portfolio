@@ -81,7 +81,7 @@ export default function Skills() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="section" id="skills" style={{ background: 'var(--bg-2)' }}>
+    <section className="section" id="skills" aria-label="Skills and Technical Arsenal" style={{ background: 'var(--bg-2)' }}>
       <div className="container">
         <motion.div
           ref={ref}

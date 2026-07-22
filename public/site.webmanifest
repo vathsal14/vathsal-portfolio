@@ -1,0 +1,23 @@
+{
+  "name": "Vathsal Vuppala — AI Software Developer",
+  "short_name": "Vathsal.dev",
+  "description": "Portfolio of Vathsal Vuppala — AI Software Developer specializing in LLMs, multi-agent architectures, and full-stack AI systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
