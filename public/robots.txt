@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://vathsal.dev/sitemap.xml
+Sitemap: https://vathsal.is-a.dev/sitemap.xml
