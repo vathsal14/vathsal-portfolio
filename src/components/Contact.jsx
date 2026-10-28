@@ -1,21 +1,47 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import {
+  FiMail,
+  FiLinkedin,
+  FiGithub,
+  FiFileText,
+  FiArrowRight,
+  FiCheckCircle,
+} from 'react-icons/fi'
+import emailjs from '@emailjs/browser'
 import LottiePlayer from './LottiePlayer'
 import leaningAnim from '../assets/Person Leaning Holding Smartphone.json'
-import sentAnim from '../assets/Message Sent.json'
-import { FiMail, FiLinkedin, FiGithub, FiFileText } from 'react-icons/fi'
-import emailjs from '@emailjs/browser'
 
-const LINKS = [
-  { icon: <FiMail size={18} strokeWidth={2} />, label: 'Email', sub: 'vathsal14@gmail.com', href: 'mailto:vathsal14@gmail.com' },
-  { icon: <FiLinkedin size={18} strokeWidth={2} />, label: 'LinkedIn', sub: 'linkedin.com/in/vathsalvuppala', href: 'https://linkedin.com/in/vathsalvuppala' },
-  { icon: <FiGithub size={18} strokeWidth={2} />, label: 'GitHub', sub: 'github.com/vathsal14', href: 'https://github.com/vathsal14' },
-  { icon: <FiFileText size={18} strokeWidth={2} />, label: 'Resume', sub: 'Download PDF', href: '/vuppala_vathsal.pdf' },
+const CONTACT_LINKS = [
+  {
+    icon: <FiMail size={18} color="#374151" />,
+    label: 'Email',
+    value: 'vathsal74@gmail.com',
+    href: 'mailto:vathsal74@gmail.com',
+  },
+  {
+    icon: <FiLinkedin size={18} color="#374151" />,
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/vathsal-vuppala',
+    href: 'https://linkedin.com/in/vathsalvuppala',
+  },
+  {
+    icon: <FiGithub size={18} color="#374151" />,
+    label: 'GitHub',
+    value: 'github.com/vathsal10',
+    href: 'https://github.com/vathsal14',
+  },
+  {
+    icon: <FiFileText size={18} color="#374151" />,
+    label: 'Resume',
+    value: 'Download PDF',
+    href: '/vuppala_vathsal.pdf',
+  },
 ]
 
 export default function Contact() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
   const [sent, setSent] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -23,114 +49,162 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsSending(true)
-    
-    emailjs.sendForm(
-      'service_c8kbvl9',
-      'template_6uavkcr',
-      e.target,
-      'Rd3EXvPlfxF5FUKnh'
-    ).then(() => {
-      setSent(true)
-      setForm({ name: '', email: '', message: '' })
-      setIsSending(false)
-    }).catch((error) => {
-      console.error('EmailJS Error:', error)
-      alert("Failed to send message. Please try again.")
-      setIsSending(false)
-    })
+
+    emailjs
+      .sendForm(
+        'service_c8kbvl9',
+        'template_6uavkcr',
+        e.target,
+        'Rd3EXvPlfxF5FUKnh'
+      )
+      .then(() => {
+        setSent(true)
+        setForm({ name: '', email: '', message: '' })
+        setIsSending(false)
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error)
+        alert('Failed to send message. Please try again or reach out directly at vathsal74@gmail.com')
+        setIsSending(false)
+      })
   }
 
   return (
-    <section className="section" id="contact" aria-label="Contact Vathsal Vuppala">
-      <div className="container">
-        <motion.div ref={ref} className="section-header"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}>
-          <span className="label">Let's Work Together</span>
-          <h2 className="heading-xl" style={{ marginTop: 12, marginBottom: 12 }}>Get In Touch</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>
-            Always open to discussing AI architecture, freelance engineering projects, and innovative technical ideas.
-          </p>
-        </motion.div>
-
-        <div className="contact-wrapper">
+    <section className="contact-section" id="contact" aria-label="Contact" ref={ref}>
+      <div className="contact-container">
+        {/* Header */}
+        <div className="contact-header">
           <motion.div
-            style={{ marginTop: '-41px' }}
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: 28 }}>
-              Whether it's an LLM-powered product, a computer vision system, or a
-              full-stack AI platform — I'd love to hear about what you're building.
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="contact-eyebrow">LET'S WORK TOGETHER</div>
+            <h2 className="contact-main-title">
+              Get In <span className="text-orange">Touch</span>
+            </h2>
+            <p className="contact-subtitle">
+              Always open to discussing AI architecture, freelance engineering
+              projects, and innovative technical ideas. Whether it's an uncooked
+              product, a computer vision system, or a full-stack AI platform — I'd
+              love to hear about what you're building.
             </p>
-            <div>
-              {LINKS.map((l, i) => (
-                <motion.a key={l.label} href={l.href}
-                  target={l.href.startsWith('http') ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  className="contact-link-item"
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.45, delay: 0.2 + i * 0.07 }}>
-                  <div className="contact-link-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {l.icon}
-                  </div>
-                  <div>
-                    <div className="contact-link-text">{l.label}</div>
-                    <div className="contact-link-sub">{l.sub}</div>
-                  </div>
-                  <div style={{ marginLeft: 'auto', color: 'var(--text-muted)', fontSize: '0.9rem' }}>→</div>
-                </motion.a>
-              ))}
-            </div>
+          </motion.div>
+        </div>
+
+        {/* 2-Part Layout: Quick links on left, Form with leaning figure on right */}
+        <div className="contact-grid">
+          {/* ── Left Column: 4 Contact Link Cards ── */}
+          <motion.div
+            className="contact-links-column"
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {CONTACT_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith('http') || link.href.endsWith('.pdf') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="contact-card-link"
+              >
+                <div className="contact-card-icon-wrap">
+                  {link.icon}
+                </div>
+                <div className="contact-card-info">
+                  <div className="contact-card-label">{link.label}</div>
+                  <div className="contact-card-value">{link.value}</div>
+                </div>
+                <div className="contact-card-arrow">
+                  <FiArrowRight size={15} />
+                </div>
+              </a>
+            ))}
           </motion.div>
 
+          {/* ── Right Column: Form Card with Leaning Figure attached to its right edge ── */}
           <motion.div
-            style={{ position: 'relative' }}
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}>
+            className="contact-form-column"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="contact-form-with-figure-wrap">
+              <div className="contact-form-card">
+                {sent ? (
+                  <div className="contact-success-state">
+                    <FiCheckCircle size={48} color="#10B981" />
+                    <h3 className="success-title">Message Sent!</h3>
+                    <p className="success-desc">
+                      Thank you for reaching out. I will get back to you shortly!
+                    </p>
+                    <button
+                      onClick={() => setSent(false)}
+                      className="btn-send-another"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="contact-actual-form">
+                    <input type="hidden" name="from_name" value={form.name} />
+                    <input type="hidden" name="from_email" value={form.email} />
+                    <input type="hidden" name="reply_to" value={form.email} />
 
-            <div className="lottie-contact-float" style={{ position: 'absolute', right: '-160px', top: '50%', transform: 'translateY(-50%)', width: '220px', zIndex: 10, pointerEvents: 'none' }}>
-              <LottiePlayer src={leaningAnim} style={{ width: '100%', height: 'auto' }} />
-            </div>
-
-            {sent ? (
-              <div className="card" style={{ textAlign: 'center', padding: '56px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ width: '120px', height: '120px', marginBottom: 8 }}>
-                  <LottiePlayer src={sentAnim} style={{ width: '100%', height: '100%' }} />
-                </div>
-                <h3 className="heading-md" style={{ marginBottom: 8 }}>Message sent.</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
-                  I'll get back to you within 24 hours.
-                </p>
-                <button className="btn btn-ghost" style={{ marginTop: 24 }} onClick={() => setSent(false)}>
-                  Send Another
-                </button>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="contact-input-field"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="your@email.com"
+                        required
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="contact-input-field"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <textarea
+                        name="message"
+                        rows={4}
+                        placeholder="Tell me about your project..."
+                        required
+                        value={form.message}
+                        onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        className="contact-textarea-field"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isSending}
+                      className="btn-submit-message"
+                    >
+                      <span>{isSending ? 'Sending...' : 'Send Message'}</span>
+                      <FiArrowRight size={15} />
+                    </button>
+                  </form>
+                )}
               </div>
-            ) : (
-              <form className="card" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                <div className="input-group">
-                  <label className="input-label">Name</label>
-                  <input className="input-field" type="text" name="name" required placeholder="Your name"
-                    value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
-                </div>
-                <div className="input-group">
-                  <label className="input-label">Email</label>
-                  <input className="input-field" type="email" name="email" required placeholder="your@email.com"
-                    value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
-                </div>
-                <div className="input-group">
-                  <label className="input-label">Message</label>
-                  <textarea className="input-field" rows={5} name="message" required placeholder="Tell me about your project..."
-                    value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
-                </div>
-                <button type="submit" disabled={isSending} className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: 8, opacity: isSending ? 0.7 : 1 }}>
-                  {isSending ? 'Sending...' : 'Send Message →'}
-                </button>
-              </form>
-            )}
+
+              {/* Figure leaning right on the right edge of the card */}
+              <div className="contact-leaning-figure-connected">
+                <LottiePlayer
+                  src={leaningAnim}
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

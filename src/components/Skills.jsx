@@ -1,38 +1,56 @@
-import { useEffect, useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { FiCpu, FiFeather, FiLayers, FiCode, FiCloud } from 'react-icons/fi'
+import LottiePlayer from './LottiePlayer'
+import monitoAnim from '../assets/monito.json'
 
-// Only the most relevant, impactful skills
-const FEATURE_SKILL = {
-  category: 'AI / ML & LLMs',
-  level: 95,
-  description: 'End-to-end model training, fine-tuning, and production deployment. From transformer architecture to quantized inference.',
-  tools: ['PyTorch', 'PEFT / LoRA', 'RLHF / DPO', 'Sentence Transformers', 'Hybrid RAG', 'vLLM / Ollama'],
+const FEATURED_SKILL = {
+  title: 'AI / ML & LLMs',
+  percentage: 95,
+  desc: 'Production-grade ML, training, fine-tuning, and generative development from transformer architectures to agentic inference.',
+  tags: [
+    'Python',
+    'GPT / LLMs',
+    'RAG / APIs',
+    'Agentic Workflows',
+    'LangChain',
+    'NLP',
+    'PyTorch',
+  ],
 }
 
 const SECONDARY_SKILLS = [
   {
-    category: 'Agentic Systems',
-    level: 88,
-    tools: ['LangGraph', 'Tool Calling / ReAct', 'CrewAI', 'AutoGen'],
+    icon: <FiFeather size={18} color="#2563EB" />,
+    badgeBg: '#EFF6FF',
+    title: 'Agentic Systems',
+    percentage: 88,
+    tags: ['LangGraph', 'Multi-Agent Systems', 'RAG', 'Tool Use'],
   },
   {
-    category: 'Full-Stack',
-    level: 84,
-    tools: ['React', 'Next.js', 'REST APIs', 'WebSockets'],
+    icon: <FiLayers size={18} color="#7C3AED" />,
+    badgeBg: '#F5F3FF',
+    title: 'Full Stack',
+    percentage: 84,
+    tags: ['React', 'Next.js', 'FastAPI', 'Node.js', 'PostgreSQL'],
   },
   {
-    category: 'Languages',
-    level: 92,
-    tools: ['Python', 'TypeScript', 'SQL', 'Bash / Shell'],
+    icon: <FiCode size={18} color="#2563EB" />,
+    badgeBg: '#EFF6FF',
+    title: 'Languages',
+    percentage: 92,
+    tags: ['Python', 'TypeScript', 'SQL', 'Bash', 'C / C++'],
   },
   {
-    category: 'Cloud & Infra',
-    level: 80,
-    tools: ['Docker', 'Azure App Service', 'CI/CD', 'PostgreSQL'],
+    icon: <FiCloud size={18} color="#EA580C" />,
+    badgeBg: '#FFF7ED',
+    title: 'Cloud & Infra',
+    percentage: 80,
+    tags: ['Azure', 'Docker', 'CI/CD', 'Linux', 'Monitoring'],
   },
 ]
 
-function AnimatedBar({ level, delay = 0 }) {
+function SkillProgressBar({ percentage, delay = 0 }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
   const barRef = useRef(null)
@@ -40,111 +58,130 @@ function AnimatedBar({ level, delay = 0 }) {
   useEffect(() => {
     if (inView && barRef.current) {
       setTimeout(() => {
-        barRef.current.style.width = `${level}%`
-        barRef.current.style.transition = `width 1.4s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`
+        barRef.current.style.width = `${percentage}%`
+        barRef.current.style.transition = `width 1.2s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`
       }, 100)
     }
-  }, [inView, level, delay])
+  }, [inView, percentage, delay])
 
   return (
-    <div ref={ref} style={{ height: 3, background: 'var(--border)', borderRadius: 999, overflow: 'hidden' }}>
-      <div ref={barRef} style={{ height: '100%', background: 'var(--accent)', borderRadius: 999, width: 0 }} />
+    <div ref={ref} className="skill-progress-track">
+      <div ref={barRef} className="skill-progress-fill" style={{ width: 0 }} />
     </div>
   )
 }
 
-function AnimatedNumber({ value, delay = 0 }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-  const spanRef = useRef(null)
-
-  useEffect(() => {
-    if (!inView || !spanRef.current) return
-    let start = 0
-    const end = value
-    const duration = 1200 + delay
-    const step = (timestamp) => {
-      if (!start) start = timestamp
-      const progress = Math.min((timestamp - start) / duration, 1)
-      spanRef.current.textContent = Math.floor(progress * end)
-      if (progress < 1) requestAnimationFrame(step)
-      else spanRef.current.textContent = end
-    }
-    setTimeout(() => requestAnimationFrame(step), delay)
-  }, [inView, value, delay])
-
-  return <span ref={ref}><span ref={spanRef}>0</span>%</span>
-}
-
 export default function Skills() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="section" id="skills" aria-label="Skills and Technical Arsenal" style={{ background: 'var(--bg-2)' }}>
-      <div className="container">
-        <motion.div
-          ref={ref}
-          className="section-header"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="label">Technical Arsenal</span>
-          <h2 className="heading-xl" style={{ marginTop: 12, marginBottom: 12 }}>Skills & Tools</h2>
-        </motion.div>
-
-        <div className="skills-bento">
-
-          {/* ── Feature Card ── */}
+    <section className="skills-section" id="skills" aria-label="Technical Skills" ref={ref}>
+      <div className="skills-container">
+        {/* Section Header */}
+        <div className="skills-header-row">
           <motion.div
-            className="skill-feature-card"
-            initial={{ opacity: 0, y: 30 }}
+            className="skills-header-content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="skills-eyebrow">TECHNICAL ARSENAL</div>
+            <h2 className="skills-main-title">
+              Skills & <span className="text-orange">Tools</span>
+            </h2>
+            <p className="skills-subtitle">
+              Continuously learning, building, and shipping with modern AI and
+              full-stack technologies.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="skills-bento-grid">
+          {/* ── Left: Feature Card (AI / ML & LLMs) ── */}
+          <motion.div
+            className="skill-card-feature"
+            initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.1 }}
           >
-            <div className="skill-feat-top">
-              <span className="label">Primary Specialization</span>
-              <div className="skill-feat-level">
-                <AnimatedNumber value={FEATURE_SKILL.level} delay={200} />
+            <div className="skill-card-top">
+              <div className="skill-title-group">
+                <div className="skill-icon-badge purple-chip">
+                  <FiCpu size={22} color="#7C3AED" />
+                </div>
+                <h3 className="skill-card-title">{FEATURED_SKILL.title}</h3>
+              </div>
+              <div className="skill-percentage-orange">
+                {FEATURED_SKILL.percentage}%
               </div>
             </div>
-            <h3 className="skill-feat-title">{FEATURE_SKILL.category}</h3>
-            <p className="skill-feat-desc">{FEATURE_SKILL.description}</p>
-            <AnimatedBar level={FEATURE_SKILL.level} delay={200} />
-            <div className="skill-feat-tools">
-              {FEATURE_SKILL.tools.map(t => (
-                <span key={t} className="skill-chip">{t}</span>
+
+            <p className="skill-feature-description">
+              {FEATURED_SKILL.desc}
+            </p>
+
+            <SkillProgressBar percentage={FEATURED_SKILL.percentage} delay={150} />
+
+            <div className="skill-feature-tags">
+              {FEATURED_SKILL.tags.map((tag) => (
+                <span key={tag} className="skill-tag-pill">
+                  {tag}
+                </span>
               ))}
             </div>
           </motion.div>
 
-          {/* ── Secondary Grid ── */}
-          <div className="skills-secondary">
-            {SECONDARY_SKILLS.map((s, i) => (
+          {/* ── Right: 4 Secondary Cards (2x2 Grid) ── */}
+          <div className="skills-secondary-grid">
+            {SECONDARY_SKILLS.map((skill, index) => (
               <motion.div
-                key={s.category}
-                className="skill-mini-card"
+                key={skill.title}
+                className="skill-card-secondary"
+                style={{
+                  position: 'relative',
+                  zIndex: skill.title === 'Languages' ? 3 : 1,
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
+                transition={{ duration: 0.55, delay: 0.15 + index * 0.08 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
-                  <div className="skill-mini-name">{s.category}</div>
-                  <div className="skill-mini-level">
-                    <AnimatedNumber value={s.level} delay={300 + i * 80} />
+                {/* Monkey hanging with its top tucked under the Languages card */}
+                {skill.title === 'Languages' && (
+                  <div className="monkey-hanging-languages">
+                    <LottiePlayer
+                      src={monitoAnim}
+                      style={{ width: '100%', height: '100%' }}
+                    />
                   </div>
+                )}
+
+                <div className="skill-card-secondary-top">
+                  <div className="skill-sec-title-group">
+                    <div
+                      className="skill-sec-icon-badge"
+                      style={{ background: skill.badgeBg }}
+                    >
+                      {skill.icon}
+                    </div>
+                    <h4 className="skill-sec-title">{skill.title}</h4>
+                  </div>
+                  <span className="skill-sec-percentage">
+                    {skill.percentage}%
+                  </span>
                 </div>
-                <AnimatedBar level={s.level} delay={300 + i * 80} />
-                <div className="skill-mini-tools">
-                  {s.tools.map(t => (
-                    <span key={t} className="skill-chip">{t}</span>
+
+                <div className="skill-sec-tags-row">
+                  {skill.tags.map((tag) => (
+                    <span key={tag} className="skill-sec-tag-chip">
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

@@ -1,175 +1,241 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { LuGraduationCap } from 'react-icons/lu'
 import LottiePlayer from './LottiePlayer'
 import workingAnim from '../assets/Man Working on Laptop.json'
 
+const WORK_EXPERIENCE = [
+  {
+    period: 'Dec 2024\n— Present',
+    isActive: true,
+    company: 'SAAP Technologies',
+    role: 'AI & Software Products · Hyderabad',
+    logo: '/saap.png',
+    subProjects: [
+      {
+        logo: '/novo wellness.ico',
+        title: 'NOVO Wellness — Emotional Intelligence (AI)',
+        desc: 'AI-ed-tech platform for Grades 6–10 focused on emotional intelligence with assessments, games, resources and teacher dashboards.',
+        tags: ['Assessment', 'React', 'FastAPI', 'Azure'],
+      },
+      {
+        logo: '/novo health care.png',
+        title: 'NOVO Neurotech — Clinical Neurological Insights',
+        desc: 'AI/ML models for neurological disorders (Parkinson\'s, Alzheimer\'s, Epilepsy) using medical data and ML pipelines.',
+        tags: ['Modeling', 'Python', 'Clinical AI', 'Research'],
+      },
+    ],
+  },
+  {
+    period: 'Nov 2023\n— Jan 2024',
+    isActive: false,
+    company: 'Web Development Intern',
+    role: 'CodeClause · India',
+    logo: '/coderscave.png',
+    desc: 'Built responsive web apps using HTML, React and modern JS. Gained hands-on experience in deployment and real-world development workflows.',
+  },
+  {
+    period: 'Apr 2021\n— Nov 2021',
+    isActive: false,
+    company: 'Treasurer',
+    role: 'Computer Society of India · CMR College',
+    logo: '/csi_logo.png',
+  },
+]
+
+const EDUCATION = [
+  {
+    institution: 'Jawaharlal Nehru Technological University',
+    degree: 'B.Tech — Computer Science & IT',
+    score: 'CGPA: 8.7',
+    period: '2018 — 2022 | Hyderabad',
+    logo: '/cvr.webp',
+    hasCapBadge: true,
+  },
+  {
+    institution: 'Intermediate — MPC',
+    degree: 'Vijayawada Junior College',
+    period: '2016 — 2018',
+    logo: '/kmjc.png',
+  },
+  {
+    institution: 'Secondary School (SSC)',
+    degree: 'Narayana English Medium School',
+    period: '2015 — 2016',
+    logo: '/hps-ramanthapur.jpg',
+  },
+]
+
 export default function Experience() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="section" id="experience" aria-label="Work Experience and Education">
-      <div className="container">
-        <motion.div ref={ref} className="section-header"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}>
-          <span className="label">Work History</span>
-          <h2 className="heading-xl" style={{ marginTop: 12 }}>Experience</h2>
-        </motion.div>
-
-        <div className="grid-2 grid-experience" style={{ gap: 72 }}>
-          {/* Timeline */}
+    <section className="experience-section" id="experience" aria-label="Experience & Education" ref={ref}>
+      <div className="experience-container">
+        {/* Header with Eyebrow and Handwritten Subtitle with Arrow */}
+        <div className="experience-header-row">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="experience-eyebrow">MY JOURNEY</div>
+            <h2 className="experience-main-title">Experience</h2>
+          </motion.div>
+
+          {/* Subtitle with curved doodle arrow placed under the text in orange */}
+          <div className="experience-header-subtitle-wrap">
+            <span className="experience-handwritten-text">
+              Building real products, solving real problems.
+            </span>
+            <svg
+              viewBox="0 0 60 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="experience-doodle-arrow"
+            >
+              <path
+                d="M48 4 C 32 8, 16 16, 14 30"
+                stroke="#FF5E2B"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="4 3"
+              />
+              <path
+                d="M22 24 L 14 30 L 8 22"
+                stroke="#FF5E2B"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* 2-Column Experience & Education Grid */}
+        <div className="experience-grid">
+          {/* ── Left Column: Timeline ── */}
+          <motion.div
+            className="experience-timeline-col"
+            initial={{ opacity: 0, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}>
-            <div className="timeline">
-
-              {/* SAAP */}
-              <div className="timeline-item">
-                <div className="timeline-left">
-                  <div className="timeline-year">Dec 2024<br />— Present</div>
-                </div>
-                <div className="timeline-right">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
-                    <img src="/saap.png" alt="SAAP Technologies logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="timeline-company" style={{ marginBottom: 0 }}>SAAP Technologies</div>
-                      <div className="timeline-role" style={{ marginBottom: 0 }}>AI Software Developer · Hyderabad</div>
-                    </div>
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <div className="exp-timeline-wrapper">
+              {WORK_EXPERIENCE.map((item, idx) => (
+                <div key={idx} className="exp-timeline-item">
+                  {/* Left Date column */}
+                  <div className="exp-timeline-date">
+                    <span className="date-text">{item.period}</span>
                   </div>
 
-                  <div className="card" style={{ marginBottom: 16 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                      <img src="/novo wellness.ico" alt="NOVO Wellness" className="edu-logo" style={{ width: 36, height: 36 }} />
-                      <div className="timeline-sub-title" style={{ marginBottom: 0 }}>NOVO Wellness — Student Mental Health AI</div>
-                    </div>
-                    <div className="timeline-sub-desc">
-                      Architected an end-to-end agentic AI platform for students, teachers, and schools using Python, FastAPI, and React. Designed multi-agent pipelines with LLaMA and Mistral for psychometric assessment interpretation, student profiling, and personalized recommendations. Dashboards enabled early identification of behavioral patterns and improved counselor intervention speed.
-                    </div>
-                    <div className="timeline-tags">
-                      {['LLaMA', 'Mistral', 'FastAPI', 'React', 'Multi-Agent'].map(t => (
-                        <span key={t} className="tag" style={{ fontSize: '0.67rem' }}>{t}</span>
-                      ))}
-                    </div>
+                  {/* Center Dot & Track perfectly aligned with Logo center */}
+                  <div className="exp-timeline-axis">
+                    <div className={`exp-dot ${item.isActive ? 'is-active' : ''}`} />
+                    {idx < WORK_EXPERIENCE.length - 1 && <div className="exp-line" />}
                   </div>
 
-                  <div className="card">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                      <img src="/novo health care.png" alt="NOVO Neurotech" className="edu-logo" style={{ width: 28, height: 28 }} />
-                      <div className="timeline-sub-title" style={{ marginBottom: 0 }}>NOVO Neurotech — Clinical Neurological Insights</div>
+                  {/* Right Content */}
+                  <div className="exp-timeline-content">
+                    {/* Header: Logo and text */}
+                    <div className="exp-company-header">
+                      {item.logo && (
+                        <div className="exp-company-logo-wrap">
+                          <img
+                            src={item.logo}
+                            alt={item.company}
+                            className="exp-company-logo"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      <div className="exp-company-text-group">
+                        <h3 className="exp-company-name">{item.company}</h3>
+                        <div className="exp-company-role">{item.role}</div>
+                      </div>
                     </div>
-                    <div className="timeline-sub-desc">
-                      Built AI analysis pipelines for neurological scan data to support doctor decision-making. Implemented DICOM preprocessing, feature extraction, and deep learning model training using TensorFlow and PyTorch. Deployed scalable inference APIs for consistent clinical interpretation across multi-site environments.
-                    </div>
-                    <div className="timeline-tags">
-                      {['TensorFlow', 'PyTorch', 'DICOM', 'FastAPI', 'Clinical AI'].map(t => (
-                        <span key={t} className="tag" style={{ fontSize: '0.67rem' }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* CodersCave */}
-              <div className="timeline-item">
-                <div className="timeline-left">
-                  <div className="timeline-year">May 2024<br />— Jun 2024</div>
-                </div>
-                <div className="timeline-right">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-                    <img src="/coderscave.png" alt="CodersCave logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="timeline-company" style={{ marginBottom: 0 }}>Web Development Intern</div>
-                      <div className="timeline-role" style={{ marginBottom: 0 }}>CodersCave · India</div>
-                    </div>
-                  </div>
-                  <div className="timeline-sub-desc">
-                    Crafted my personal portfolio website using HTML, focusing on semantic tags for accessibility and clear structure. Designed with user-friendly navigation to showcase my skills and experiences effectively.
-                  </div>
-                </div>
-              </div>
+                    {/* Simple description if not subProjects */}
+                    {item.desc && (
+                      <p className="exp-simple-desc">{item.desc}</p>
+                    )}
 
-              {/* CSI */}
-              <div className="timeline-item">
-                <div className="timeline-left">
-                  <div className="timeline-year">Mar 2023<br />— Mar 2024</div>
-                </div>
-                <div className="timeline-right">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-                    <img src="/csi_logo.png" alt="Computer Society of India logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="timeline-company" style={{ marginBottom: 0 }}>Treasurer</div>
-                      <div className="timeline-role" style={{ marginBottom: 0 }}>Computer Society of India · CVR College</div>
-                    </div>
+                    {/* Subprojects (NOVO Wellness & NOVO Neurotech) */}
+                    {item.subProjects && (
+                      <div className="exp-subprojects-list">
+                        {item.subProjects.map((sub, sIdx) => (
+                          <div key={sIdx} className="exp-subproject-card">
+                            <div className="exp-sub-header">
+                              <img
+                                src={sub.logo}
+                                alt={sub.title}
+                                className="exp-sub-logo"
+                                loading="lazy"
+                              />
+                              <h4 className="exp-sub-title">{sub.title}</h4>
+                            </div>
+                            <p className="exp-sub-desc">{sub.desc}</p>
+                            <div className="exp-sub-tags">
+                              {sub.tags.map((tag) => (
+                                <span key={tag} className="exp-sub-tag">
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-
+              ))}
             </div>
           </motion.div>
 
-          {/* Education */}
+          {/* ── Right Column: Education & Laptop Illustration ── */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            className="experience-education-col"
+            initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}>
-            <span className="label" style={{ display: 'block', marginBottom: 28 }}>Education</span>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-
-              {/* B.Tech */}
-              <div className="card edu-card">
-                <div className="edu-row">
-                  <div className="edu-content-left">
-                    <img src="/cvr.webp" alt="CVR College of Engineering logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="edu-degree">B.Tech — Computer Science & IT</div>
-                      <div className="edu-college">CVR College of Engineering (JNTUH)</div>
-                      <div className="label" style={{ marginTop: 4 }}>July 2021 – May 2025 · Hyderabad</div>
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            {/* Education Cards */}
+            <div className="education-cards-stack">
+              {EDUCATION.map((edu, idx) => (
+                <div key={idx} className="edu-card-item">
+                  <div className="edu-card-left">
+                    <div className="edu-logo-wrapper">
+                      <img
+                        src={edu.logo}
+                        alt={edu.institution}
+                        className="edu-logo-img"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="edu-info">
+                      <h4 className="edu-institution-name">{edu.institution}</h4>
+                      <div className="edu-degree-text">{edu.degree}</div>
+                      {edu.score && <div className="edu-score-pill">{edu.score}</div>}
+                      <div className="edu-period-text">{edu.period}</div>
                     </div>
                   </div>
-                  <span className="tag tag-dark edu-score">8.7 CGPA</span>
-                </div>
-              </div>
 
-              {/* Intermediate */}
-              <div className="card edu-card">
-                <div className="edu-row">
-                  <div className="edu-content-left">
-                    <img src="/kmjc.png" alt="Krishnamurthy Junior College logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="edu-degree">Intermediate — MPC</div>
-                      <div className="edu-college">Krishnamurthy Junior College</div>
-                      <div className="label" style={{ marginTop: 4 }}>2019 – 2021</div>
+                  {edu.hasCapBadge && (
+                    <div className="edu-cap-badge">
+                      <LuGraduationCap size={18} color="#1F2937" />
                     </div>
-                  </div>
-                  <span className="tag tag-dark edu-score">95.6%</span>
+                  )}
                 </div>
-              </div>
-
-              {/* Schooling */}
-              <div className="card edu-card">
-                <div className="edu-row">
-                  <div className="edu-content-left">
-                    <img src="/hps-ramanthapur.jpg" alt="The Hyderabad Public School Ramanthapur logo" className="edu-logo" loading="lazy" />
-                    <div>
-                      <div className="edu-degree">Secondary School (CBSE)</div>
-                      <div className="edu-college">The Hyderabad Public School, Ramanthapur</div>
-                      <div className="label" style={{ marginTop: 4 }}>2009 – 2019</div>
-                    </div>
-                  </div>
-                  <span className="tag tag-dark edu-score">87%</span>
-                </div>
-              </div>
-
+              ))}
             </div>
 
-            <div className="lottie-desktop-only" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 40, opacity: 0.8 }}>
-              <div style={{ width: '100%', maxWidth: 380, aspectRatio: '1/1' }}>
-                <LottiePlayer src={workingAnim} style={{ width: '100%', height: '100%' }} />
-              </div>
+            {/* Man Working on Laptop Lottie */}
+            <div className="exp-laptop-illustration">
+              <LottiePlayer
+                src={workingAnim}
+                style={{ width: '100%', maxWidth: '340px', height: 'auto' }}
+              />
             </div>
           </motion.div>
         </div>
